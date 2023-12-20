@@ -1,0 +1,40 @@
+# Airflow Cluster Configuration with Docker Compose
+
+## License
+Licensed to the Apache Software Foundation (ASF) under one or more contributor license agreements. See the NOTICE file distributed with this work for additional information regarding copyright ownership. The ASF licenses this file to you under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
+
+Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
+
+## Introduction
+This Docker Compose setup is designed to quickly and easily launch an Apache Airflow cluster using CeleryExecutor with Redis and PostgreSQL. It's ideal for local development and testing, but should not be used in a production environment.
+
+## Prerequisites
+- Docker and Docker Compose installed
+- Basic understanding of Docker and Airflow
+
+## Configuration
+The `docker-compose.yaml` file in this repository sets up a basic Airflow cluster. You can customize the following environment variables, either directly in the file or in an `.env` file:
+
+- `AIRFLOW_IMAGE_NAME`: Docker image for Airflow (default: `apache/airflow:2.8.0`)
+- `AIRFLOW_UID`: User ID for running Airflow containers (default: `50000`)
+- `AIRFLOW_PROJ_DIR`: Directory for mounting volumes (default: `.`)
+- `_AIRFLOW_WWW_USER_USERNAME`: Username for the Airflow webserver (default: `airflow`)
+- `_AIRFLOW_WWW_USER_PASSWORD`: Password for the Airflow webserver (default: `airflow`)
+- `_PIP_ADDITIONAL_REQUIREMENTS`: Additional PIP packages (use sparingly)
+
+## Services
+The configuration includes:
+- `postgres`: PostgreSQL database for Airflow metadata
+- `redis`: Redis server for CeleryExecutor
+- `airflow-webserver`: Airflow webserver
+- `airflow-scheduler`: Airflow scheduler
+- `airflow-worker`: Airflow worker for CeleryExecutor
+- `airflow-triggerer`: Airflow triggerer
+- `airflow-init`: Initialization service for Airflow
+- `airflow-cli`: CLI service for Airflow
+- `flower`: Monitoring tool for Celery
+
+## Usage
+To start the Airflow cluster, run:
+```bash
+docker-compose up
